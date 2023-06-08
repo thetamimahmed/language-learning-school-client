@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import { FaFacebookSquare, FaInstagramSquare, FaLinkedin } from "react-icons/fa";
 const Footer = () => {
     return (
         <footer className="footer footer-center p-10 bg-[#6255A5] rounded">
