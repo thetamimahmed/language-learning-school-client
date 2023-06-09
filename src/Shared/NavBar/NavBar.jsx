@@ -3,7 +3,7 @@ const NavBar = () => {
     const navInfo = <>
         <li className="text-lg"><Link to="/">Home</Link></li>
         <li className="text-lg"><Link to="/instructors">Instructors</Link></li>
-        <li className="text-lg"><Link to="/">Classes</Link></li>
+        <li className="text-lg"><Link to="/classes">Classes</Link></li>
     </>
     return (
         <div className="navbar bg-base-100 max-w-7xl mx-auto">

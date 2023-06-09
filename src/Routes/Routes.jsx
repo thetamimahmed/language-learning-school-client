@@ -2,6 +2,7 @@ import {
     createBrowserRouter,
 } from "react-router-dom";
 import Main from "../Layouts/Main";
+import Classes from "../Pages/Classes/Classes";
 import Home from "../Pages/Home/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors";
 
@@ -18,7 +19,11 @@ import Instructors from "../Pages/Instructors/Instructors";
             {
                 path:'instructors',
                 element: <Instructors></Instructors>
-            }
+            },
+            {
+                path:'classes',
+                element: <Classes></Classes>
+            },
         ]
     },
 ]);
