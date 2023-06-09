@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const Register = () => {
+    const {name} = useAuth()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
@@ -9,7 +11,7 @@ const Register = () => {
     console.log(errors)
     return (
         <div className="bg-base-200 w-1/3 mx-auto pb-10 px-5">
-            <h1 className="text-2xl text-center py-5 font-bold text-[#6255A5]">Please Regiser!</h1>
+            <h1 className="text-2xl text-center py-5 font-bold text-[#6255A5]">Please Regiser! {name}</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control mb-4">
                     <label className="label">
