@@ -1,5 +1,7 @@
 import {Link} from "react-router-dom"
+import useAuth from "../../Hooks/useAuth";
 const NavBar = () => {
+    const {user} = useAuth()
     const navInfo = <>
         <li className="text-lg"><Link to="/">Home</Link></li>
         <li className="text-lg"><Link to="/instructors">Instructors</Link></li>
@@ -24,7 +26,12 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to="/login" className="btn bg-[#84D19F] text-white hover:bg-[#584B9F]">Log in</Link>
+                {
+                    user ? <>
+                    <Link to="/" className="btn bg-[#84D19F] text-white hover:bg-[#584B9F]">Dashboard</Link>
+                    <img title={user.displayName} className="w-14 h-14 rounded-full ml-5" src={user.photoURL} alt="" />
+                    </> : <Link to="/login" className="btn bg-[#84D19F] text-white hover:bg-[#584B9F]">Log in</Link>
+                }
             </div>
         </div>
     );
