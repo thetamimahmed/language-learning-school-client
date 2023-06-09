@@ -7,7 +7,7 @@ const NavBar = () => {
         <li className="text-lg"><Link to="/instructors">Instructors</Link></li>
         <li className="text-lg"><Link to="/classes">Classes</Link></li>
         {
-            user && <li className="text-lg"><Link to="/classes">Dashboard</Link></li>
+            user && <li className="text-lg"><Link to="/dashboard">Dashboard</Link></li>
         }
     </>
 

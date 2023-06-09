@@ -25,6 +25,7 @@ const Classes = () => {
                   <p>Price: ${course.price}</p>              
                   <p>Enroll: {course.total_enroll} Students</p>              
                 </div>
+                <button className="btn bg-[#84D19F] text-white hover:bg-[#584B9F] rounded-none">Select</button>
               </div>)
             }
         </div>
