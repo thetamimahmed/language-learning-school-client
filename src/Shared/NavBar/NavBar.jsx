@@ -30,6 +30,7 @@ const NavBar = () => {
                     user ? <>
                     <Link to="/" className="btn bg-[#84D19F] text-white hover:bg-[#584B9F]">Dashboard</Link>
                     <img title={user.displayName} className="w-14 h-14 rounded-full ml-5" src={user.photoURL} alt="" />
+                    
                     </> : <Link to="/login" className="btn bg-[#84D19F] text-white hover:bg-[#584B9F]">Log in</Link>
                 }
             </div>
