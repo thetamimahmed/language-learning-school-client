@@ -1,23 +1,32 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 
 const Register = () => {
-    const {signUp, updateUserProfile} = useAuth()
+    const { signUp, updateUserProfile } = useAuth()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
         signUp(data.email, data.password)
-        .then(result =>{
-            const loggedUser = result.user
-            console.log(loggedUser)
-            updateUserProfile(data.name, data.photoURL)
-            .then(()=>{})
-            .catch(error =>{console.log(error)})
-        })
-        .catch(error =>{
-            console.log(error)
-        })
+            .then(result => {
+                const loggedUser = result.user
+                console.log(loggedUser)
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Your work has been saved',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    })
+                    .catch(error => { console.log(error) })
+            })
+            .catch(error => {
+                console.log(error)
+            })
     };
     console.log(errors)
     return (
@@ -58,7 +67,7 @@ const Register = () => {
                     <label className="label">
                         <span className="label-text text-lg">Confirm Password</span>
                     </label>
-                    <input type="password" {...register("confirmPassword", { required: true, validate: (value) => value === watch('password') })} placeholder="Confirm Password" className="input input-bordered"  />
+                    <input type="password" {...register("confirmPassword", { required: true, validate: (value) => value === watch('password') })} placeholder="Confirm Password" className="input input-bordered" />
                     {errors.confirmPassword && <span className="text-red-600">Not Matched Password</span>}
                 </div>
                 <div className="text-center">

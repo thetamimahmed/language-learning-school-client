@@ -1,12 +1,21 @@
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import useAuth from "../../Hooks/useAuth";
 const NavBar = () => {
-    const {user} = useAuth()
+    const { user, logOut } = useAuth()
     const navInfo = <>
         <li className="text-lg"><Link to="/">Home</Link></li>
         <li className="text-lg"><Link to="/instructors">Instructors</Link></li>
         <li className="text-lg"><Link to="/classes">Classes</Link></li>
+        {
+            user && <li className="text-lg"><Link to="/classes">Dashboard</Link></li>
+        }
     </>
+
+    const handleLogOut = () =>{
+        logOut()
+        .then(()=>{})
+        .catch(()=>{})
+    }
     return (
         <div className="navbar bg-base-100 max-w-7xl mx-auto">
             <div className="navbar-start">
@@ -22,15 +31,16 @@ const NavBar = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                   {navInfo}
+                    {navInfo}
                 </ul>
             </div>
             <div className="navbar-end">
                 {
                     user ? <>
-                    <Link to="/" className="btn bg-[#84D19F] text-white hover:bg-[#584B9F]">Dashboard</Link>
-                    <img title={user.displayName} className="w-14 h-14 rounded-full ml-5" src={user.photoURL} alt="" />
-                    
+                        <button onClick={handleLogOut} className="btn bg-[#84D19F] text-white hover:bg-[#584B9F]">Log out</button>
+                        
+                        <img title={user.displayName} className="w-14 h-14 rounded-full ml-5" src={user.photoURL} alt="" />
+
                     </> : <Link to="/login" className="btn bg-[#84D19F] text-white hover:bg-[#584B9F]">Log in</Link>
                 }
             </div>
