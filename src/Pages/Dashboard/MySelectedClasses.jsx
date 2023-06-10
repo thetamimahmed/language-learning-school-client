@@ -1,17 +1,46 @@
 import { useQuery } from '@tanstack/react-query'
 import { AiFillDelete } from "react-icons/ai";
+import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
 
 const MySelectedClasses = () => {
-    const {user} = useAuth()
-    const { data: bookedClasses = [] } = useQuery({
+    const { user } = useAuth()
+    const { data: bookedClasses = [], refetch } = useQuery({
         queryKey: ['bookedClasses'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/bookingclasses?email=${user?.email}`)
             return res.json();
         },
     })
-    console.log(bookedClasses)
+
+    const deleteClass = id => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/bookingclasses?id=${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        refetch()
+                        if (data.deletedCount > 0) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+            }
+        })
+    }
     return (
         <div>
             <h1 className='ml-12 text-3xl mt-10 border-b-4 border-[#84D19F] w-1/5 pb-3 text-[#6255A5] font-bold'>Selected Classes</h1>
@@ -38,7 +67,7 @@ const MySelectedClasses = () => {
                                 <td>${myClass.price}</td>
                                 <td className='flex items-center'>
                                     <button className="btn btn-xs bg-[#84D19F] text-white hover:bg-[#584B9F]">Pay</button>
-                                    <button className='text-xl text-red-600 ml-3'><AiFillDelete></AiFillDelete></button>
+                                    <button onClick={()=>{deleteClass(myClass._id)}} className='text-xl text-red-600 ml-3'><AiFillDelete></AiFillDelete></button>
                                 </td>
                             </tr>)
                         }
