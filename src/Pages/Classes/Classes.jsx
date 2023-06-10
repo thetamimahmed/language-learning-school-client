@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
+import useAuth from '../../Hooks/useAuth';
 
 const Classes = () => {
+  const {user} = useAuth()
     const { data: classes = [] } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
@@ -8,6 +10,22 @@ const Classes = () => {
             return res.json();
         },
     })
+
+    const handleSelectClass = (course) =>{
+      if(user && user?.email){
+        const selectClass = {...course, email: user.email}
+        fetch('http://localhost:5000/bookingclasses',{
+          method: 'POST',
+          headers: {
+            'content-type':'application/json'
+          },
+          body: JSON.stringify(selectClass)
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+      }
+    }
+
     return (
         <div className='bg-gradient-to-t from-transparent via-[#84d19f97]  to-transparent'>
         <h1 className='ml-12 text-3xl mt-10 border-b-4 border-[#84D19F] w-1/5 pb-3 text-[#6255A5] font-bold'>All Classes</h1>
@@ -25,7 +43,7 @@ const Classes = () => {
                   <p>Price: ${course.price}</p>              
                   <p>Enroll: {course.total_enroll} Students</p>              
                 </div>
-                <button className="btn bg-[#84D19F] text-white hover:bg-[#584B9F] rounded-none">Select</button>
+                <button onClick={()=>{handleSelectClass(course)}} className="btn bg-[#84D19F] text-white hover:bg-[#584B9F] rounded-none">Select</button>
               </div>)
             }
         </div>
