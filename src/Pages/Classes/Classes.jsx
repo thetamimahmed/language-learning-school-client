@@ -1,4 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
+import Swal from 'sweetalert2';
+
 import useAuth from '../../Hooks/useAuth';
 
 const Classes = () => {
@@ -22,8 +24,20 @@ const Classes = () => {
           body: JSON.stringify(selectClass)
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+          if(data.insertedId){
+            Swal.fire({
+                position: 'Center',
+                icon: 'success',
+                title: 'Class Selected Successfully',
+                showConfirmButton: false,
+                timer: 1500
+              })
+        } 
+       })
+      
       }
+
     }
 
     return (
@@ -43,7 +57,7 @@ const Classes = () => {
                   <p>Price: ${course.price}</p>              
                   <p>Enroll: {course.total_enroll} Students</p>              
                 </div>
-                <button onClick={()=>{handleSelectClass(course)}} className="btn bg-[#84D19F] text-white hover:bg-[#584B9F] rounded-none">Select</button>
+                <button  onClick={()=>{handleSelectClass(course)}} className="btn bg-[#84D19F] text-white hover:bg-[#584B9F] rounded-none">Select</button>
               </div>)
             }
         </div>
