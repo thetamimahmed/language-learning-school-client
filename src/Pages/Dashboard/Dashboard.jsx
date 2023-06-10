@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, Link } from "react-router-dom"
 import ActiveLink from "./ActiveLink/ActiveLink";
 
 
@@ -18,6 +18,7 @@ const Dashboard = () => {
                 <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                     <a className="normal-case text-lg lg:text-2xl font-bold mb-4 text-[#584B9F]">Language <span className="text-[#84D19F]"> Learning</span> <br />School</a>
                     {/* Sidebar content here */}
+                    <li className="rounded-lg text-lg hover:text[#584B9F] mb-3"><Link to="/">Home</Link></li>
                     {
                         isAdmin ? <>
                         <li className="rounded-lg text-lg hover:text[#584B9F] mb-3"><ActiveLink to="/dashboard/adminhome">Admin Home</ActiveLink></li>

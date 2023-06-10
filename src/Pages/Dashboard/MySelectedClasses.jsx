@@ -2,14 +2,17 @@ import { useQuery } from '@tanstack/react-query'
 import { AiFillDelete } from "react-icons/ai";
 import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const MySelectedClasses = () => {
+    // const token = localStorage.getItem('access-token')
     const { user } = useAuth()
+    const [axiosSecure] = useAxiosSecure()
     const { data: bookedClasses = [], refetch } = useQuery({
         queryKey: ['bookedClasses'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/bookingclasses?email=${user?.email}`)
-            return res.json();
+            const res = await axiosSecure(`/bookingclasses?email=${user?.email}`)
+            return res.data;
         },
     })
 
