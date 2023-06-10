@@ -71,7 +71,7 @@ const Register = () => {
                     {errors.confirmPassword && <span className="text-red-600">Not Matched Password</span>}
                 </div>
                 <div className="text-center">
-                    <input className="btn btn-md bg-[#84D19F] hover:text-white hover:bg-[#6255A5]" type="submit" value="Register" />
+                    <input className="btn btn-md bg-[#317047] hover:bg-[#584B9F] text-white" type="submit" value="Register" />
                 </div>
             </form>
             <p className="text-center text-[#6255A5] text-lg mt-4">Already Have An Account? <Link className="text-[#84D19F] hover:underline" to="/login">Login</Link></p>

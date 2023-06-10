@@ -49,7 +49,7 @@ const Login = () => {
                     {errors.password?.type === 'required' && <p className="text-red-600">Password is Required</p>}
                 </div>
                 <div className="text-center">
-                    <input className="btn btn-md bg-[#84D19F] hover:text-white hover:bg-[#6255A5]" type="submit" value="Log in" />
+                    <input className="btn btn-md bg-[#317047] hover:bg-[#584B9F] text-white" type="submit" value="Log in" />
                 </div>
             </form>
             <p className="text-center text-[#6255A5] text-lg mt-4">New In This Site? <Link className="text-[#84D19F] hover:underline" to="/register">Register</Link></p>

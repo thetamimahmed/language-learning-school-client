@@ -4,7 +4,7 @@ import ActiveLink from "./ActiveLink/ActiveLink";
 
 const Dashboard = () => {
     const isAdmin = false;
-    const isInstructor = false;
+    const isInstructor = true;
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
