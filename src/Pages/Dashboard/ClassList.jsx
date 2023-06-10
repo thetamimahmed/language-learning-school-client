@@ -3,12 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 
 const ClassList = () => {
-    const {user, loading} = useAuth()
+    const {user} = useAuth()
     const [axiosSecure] = useAxiosSecure()
 
     const { data: addedClasses = [] } = useQuery({
         queryKey: ['addedClasses', user?.email],
-        enabled: !loading,
         queryFn: async () => {
             const res = await axiosSecure(`/addedClasses?email=${user?.email}`)
             return res.data;
