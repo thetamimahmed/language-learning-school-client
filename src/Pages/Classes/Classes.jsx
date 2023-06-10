@@ -1,9 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 
 import useAuth from '../../Hooks/useAuth';
 
 const Classes = () => {
+  const [disabledButtons, setDisabledButtons] = useState([]);
+
   const {user} = useAuth()
     const { data: classes = [] } = useQuery({
         queryKey: ['classes'],
@@ -14,8 +17,9 @@ const Classes = () => {
     })
 
     const handleSelectClass = (course) =>{
+      const {_id, name, instructor, available_seats, price, image, total_enroll} = course
       if(user && user?.email){
-        const selectClass = {...course, email: user.email}
+        const selectClass = {classID:_id, name, instructor, available_seats, price, image, total_enroll,  email: user.email}
         fetch('http://localhost:5000/bookingclasses',{
           method: 'POST',
           headers: {
@@ -37,6 +41,7 @@ const Classes = () => {
        })
       
       }
+      setDisabledButtons(prevState => [...prevState, course._id]);
 
     }
 
@@ -57,7 +62,7 @@ const Classes = () => {
                   <p>Price: ${course.price}</p>              
                   <p>Enroll: {course.total_enroll} Students</p>              
                 </div>
-                <button  onClick={()=>{handleSelectClass(course)}} className="btn bg-[#84D19F] text-white hover:bg-[#584B9F] rounded-none">Select</button>
+                <button disabled={disabledButtons.includes(course._id)}   onClick={()=>{handleSelectClass(course)}} className="btn bg-[#84D19F] text-white hover:bg-[#584B9F] rounded-none">Select</button>
               </div>)
             }
         </div>
