@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 
@@ -8,6 +9,7 @@ const imgHostingURL = `https://api.imgbb.com/1/upload?key=${imgHostingToken}`
 
 const AddClass = () => {
     const [axiosSecure] = useAxiosSecure()
+    const { user } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         const formData = new FormData()
@@ -16,31 +18,33 @@ const AddClass = () => {
             method: 'POST',
             body: formData
         })
-        .then(res=> res.json())
-        .then(imgRes => {
-            if(imgRes.success){
-                const imgURL = imgRes.data.display_url
-                const {price} = data
-                const addedClass = data;
-                addedClass.price = parseFloat(price)
-                addedClass.image = imgURL;
-                addedClass.total_enroll = 0;
-                addedClass.status = 'pending';
-                console.log(addedClass)
-                axiosSecure.post("/addedClass", addedClass)
-                .then(data =>{
-                    if(data.data.insertedId){
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Class Now In Pending',
-                            showConfirmButton: false,
-                            timer: 1500
-                          })
+            .then(res => res.json())
+            .then(imgRes => {
+                if (imgRes.success) {
+                    const imgURL = imgRes.data.display_url
+                    const { price } = data
+                    const addedClass = data;
+                    addedClass.price = parseFloat(price)
+                    addedClass.image = imgURL;
+                    addedClass.total_enroll = 0;
+                    addedClass.status = 'pending';
+                    console.log(addedClass)
+                    if (user) {
+                        axiosSecure.post("/addedClasses", addedClass)
+                            .then(data => {
+                                if (data.data.insertedId) {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'success',
+                                        title: 'Class Now In Pending',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                }
+                            })
                     }
-                })
-            }
-        })
+                }
+            })
     };
     return (
         <div>
@@ -51,15 +55,13 @@ const AddClass = () => {
                         <label className="label">
                             <span className="label-text text-lg">Instructor Name</span>
                         </label>
-                        <input type="text" {...register("instructor", { required: true })} placeholder="Instructor Name" className="input input-bordered" />
-                        {errors.instructor && <span className="text-red-600">Instructor Name is required</span>}
+                        <input type="text"  {...register("instructor", { required: true })} placeholder="Instructor Name" defaultValue={user?.displayName} className="input input-bordered" />
                     </div>
                     <div className="form-control mb-4 w-1/2">
                         <label className="label">
                             <span className="label-text text-lg">Instructor Email</span>
                         </label>
-                        <input type="email" {...register("email", { required: true })} placeholder="Instructor Email" className="input input-bordered" />
-                        {errors.email && <span className="text-red-600">Instructor Email is required</span>}
+                        <input type="email" {...register("email", { required: true })} placeholder="Instructor Email"  defaultValue={user?.email} className="input input-bordered" />
                     </div>
                 </div>
                 <div className="flex gap-5">
