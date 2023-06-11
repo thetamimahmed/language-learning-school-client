@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link,  useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
     const { logIn } = useAuth()
@@ -52,6 +53,7 @@ const Login = () => {
                     <input className="btn btn-md bg-[#317047] hover:bg-[#584B9F] text-white" type="submit" value="Log in" />
                 </div>
             </form>
+            <SocialLogin></SocialLogin>
             <p className="text-center text-[#6255A5] text-lg mt-4">New In This Site? <Link className="text-[#84D19F] hover:underline" to="/register">Register</Link></p>
         </div>
     );
