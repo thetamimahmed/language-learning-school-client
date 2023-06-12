@@ -1,10 +1,11 @@
 import { Outlet, Link } from "react-router-dom"
+import useRole from "../../Hooks/useRole";
 import ActiveLink from "./ActiveLink/ActiveLink";
 
 
 const Dashboard = () => {
-    const isAdmin = true;
-    const isInstructor = false;
+    const isInstructor = useRole('instructor')
+    const isAdmin = useRole('admin')
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

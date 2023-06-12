@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
-const ManageUsers = () => {
+const ManageUsers = () => {    
     const [axiosSecure] = useAxiosSecure()
     const { data: users = [], refetch } = useQuery({
         queryKey: ['bookedClasses'],
@@ -28,7 +28,6 @@ const ManageUsers = () => {
         })
     }
 
-    console.log(users)
     return (
         <div>
             <h1 className='ml-12 text-3xl mt-10 border-b-4 border-[#84D19F] w-1/5 pb-3 text-[#6255A5] font-bold'>Your Added Class List</h1>
