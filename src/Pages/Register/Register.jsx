@@ -1,12 +1,16 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
+    const [axiosSecure] = useAxiosSecure()
     const { signUp, updateUserProfile } = useAuth()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+
     const onSubmit = data => {
         console.log(data)
         signUp(data.email, data.password)
@@ -15,13 +19,21 @@ const Register = () => {
                 console.log(loggedUser)
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Your work has been saved',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
+                        const saveUser = { name: data.name, email: data.email, role: 'student' }
+                        axiosSecure.post("/users", saveUser)
+                            .then(data => {
+                                if (data.data.insertedId) {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'success',
+                                        title: 'Register Successfully',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    navigate("/")
+                                }
+                            })
+
                     })
                     .catch(error => { console.log(error) })
             })
