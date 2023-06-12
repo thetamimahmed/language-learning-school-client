@@ -12,6 +12,7 @@ import InstructorHome from "../Pages/Dashboard/InstructorHome";
 import ManageClasses from "../Pages/Dashboard/ManageClasses";
 import ManageUsers from "../Pages/Dashboard/ManageUsers";
 import MySelectedClasses from "../Pages/Dashboard/MySelectedClasses";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
 import StudentHome from "../Pages/Dashboard/StudentHome";
 import Home from "../Pages/Home/Home/Home";
@@ -63,6 +64,10 @@ import PrivateRoute from "./PrivateRoute";
             {
                 path: "enrollclasses",
                 element: <EnrollClasses></EnrollClasses>
+            },
+            {
+                path: "payment",
+                element: <Payment></Payment>
             },
             {
                 path: "paymenthistory",

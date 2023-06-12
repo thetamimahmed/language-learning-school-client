@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { AiFillDelete } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
@@ -70,8 +71,10 @@ const MySelectedClasses = () => {
                                 <td>{myClass.available_seats}</td>
                                 <td>${myClass.price}</td>
                                 <td className='flex items-center'>
-                                    <button className="btn btn-xs bg-[#84D19F] text-white hover:bg-[#584B9F]">Pay</button>
-                                    <button onClick={()=>{deleteClass(myClass._id)}} className='text-xl text-red-600 ml-3'><AiFillDelete></AiFillDelete></button>
+                                    <Link to="/dashboard/payment" state={myClass}>
+                                        <button className="btn btn-xs bg-[#84D19F] text-white hover:bg-[#584B9F]">Pay</button>
+                                    </Link>
+                                    <button onClick={() => { deleteClass(myClass._id) }} className='text-xl text-red-600 ml-3'><AiFillDelete></AiFillDelete></button>
                                 </td>
                             </tr>)
                         }
