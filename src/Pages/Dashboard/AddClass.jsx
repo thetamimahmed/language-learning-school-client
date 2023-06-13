@@ -29,7 +29,6 @@ const AddClass = () => {
                     addedClass.image = imgURL;
                     addedClass.total_enroll = 0;
                     addedClass.status = 'pending';
-                    console.log(addedClass)
                     if (user) {
                         axiosSecure.post("/addedClasses", addedClass)
                             .then(data => {

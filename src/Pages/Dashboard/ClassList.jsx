@@ -1,9 +1,10 @@
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
+import { Link } from "react-router-dom";
 
 const ClassList = () => {
-    const {user} = useAuth()
+    const { user } = useAuth()
     const [axiosSecure] = useAxiosSecure()
 
     const { data: addedClasses = [] } = useQuery({
@@ -36,36 +37,39 @@ const ClassList = () => {
                     </thead>
                     <tbody >
                         {
-                            addedClasses.map((addedClass, index) => { return <tr key={addedClass._id}>
-                                <th>
-                                    {index + 1}
-                                </th>
-                                <td>
-                                    <div className="flex items-center space-x-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src={addedClass.image} alt="Avatar Tailwind CSS Component" />
+                            addedClasses.map((addedClass, index) => {
+                                return <tr key={addedClass._id}>
+                                    <th>
+                                        {index + 1}
+                                    </th>
+                                    <td>
+                                        <div className="flex items-center space-x-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    <img src={addedClass.image} alt="Avatar Tailwind CSS Component" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="font-bold">{addedClass.name}</div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div className="font-bold">{addedClass.name}</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    ${addedClass.price}
-                                </td>
-                                <td>{addedClass.available_seats}</td>
-                                <td>
-                                    {addedClass.status}
-                                </td>
-                                <td>
-                                    {addedClass?.feedback ? addedClass.feedback : 'No Feedback'}
-                                </td>
-                                <td>
-                                    <button className="btn btn-sm bg-[#317047] hover:bg-[#584B9F] text-white">Update</button>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>
+                                        ${addedClass.price}
+                                    </td>
+                                    <td>{addedClass.available_seats}</td>
+                                    <td>
+                                        {addedClass.status}
+                                    </td>
+                                    <td>
+                                        {addedClass?.feedback ? addedClass.feedback : 'No Feedback'}
+                                    </td>
+                                    <td>
+                                        <Link to="/dashboard/updateclass" state={addedClass}>
+                                            <button className="btn btn-sm bg-[#317047] hover:bg-[#584B9F] text-white">Update</button>
+                                        </Link>
+                                    </td>
+                                </tr>
                             })
                         }
                     </tbody>

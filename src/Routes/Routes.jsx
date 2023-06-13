@@ -12,6 +12,7 @@ import ManageUsers from "../Pages/Dashboard/ManageUsers";
 import MySelectedClasses from "../Pages/Dashboard/MySelectedClasses";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
+import UpdateClass from "../Pages/Dashboard/UpdateClass";
 import Home from "../Pages/Home/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors";
 import Login from "../Pages/Login/Login";
@@ -85,6 +86,10 @@ import PrivateRoute from "./PrivateRoute";
             {
                 path: "classlist",
                 element:<InstructrorRoute><ClassList></ClassList></InstructrorRoute>
+            },
+            {
+                path: "updateclass",
+                element:<InstructrorRoute><UpdateClass></UpdateClass></InstructrorRoute>
             },
         ]
     }
