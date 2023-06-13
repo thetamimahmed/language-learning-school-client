@@ -22,8 +22,9 @@ const AddClass = () => {
             .then(imgRes => {
                 if (imgRes.success) {
                     const imgURL = imgRes.data.display_url
-                    const { price } = data
+                    const { price, available_seats } = data
                     const addedClass = data;
+                    addedClass.available_seats = parseFloat(available_seats)
                     addedClass.price = parseFloat(price)
                     addedClass.image = imgURL;
                     addedClass.total_enroll = 0;

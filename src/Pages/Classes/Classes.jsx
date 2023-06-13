@@ -51,7 +51,7 @@ const Classes = () => {
 
         <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10 pb-10 '>
             {
-                classes.map(course => <div key={course._id} className="card w-96 bg-base-100 shadow-xl mx-auto">
+                classes.map(course => <div key={course._id} className={course.available_seats === 0 ? "card w-96 bg-red-400 shadow-xl mx-auto" : "card w-96 bg-base-100 shadow-xl mx-auto"}>
                 <figure><img style={{height:"300px"}} src={course.image} alt="Shoes" /></figure>
                 <div className="card-body">
                   <h2 className="card-title">
@@ -62,7 +62,7 @@ const Classes = () => {
                   <p>Price: ${course.price}</p>              
                   <p>Enroll: {course.total_enroll} Students</p>              
                 </div>
-                <button disabled={disabledButtons.includes(course._id)}   onClick={()=>{handleSelectClass(course)}} className="btn bg-[#84D19F] text-white hover:bg-[#584B9F] rounded-none">Select</button>
+                <button disabled={disabledButtons.includes(course._id) || course.available_seats===0}   onClick={()=>{handleSelectClass(course)}} className="btn bg-[#84D19F] text-white hover:bg-[#584B9F] rounded-none">Select</button>
               </div>)
             }
         </div>

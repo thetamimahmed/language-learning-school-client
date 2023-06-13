@@ -33,6 +33,7 @@ const ManageClasses = () => {
                         timer: 1500
                     })
                     if (status === 'Approve') {
+                        approveClass.status = "Approve"
                         axiosSecure.post("/classes", approveClass)
                             .then(data => {
                                 if (data.data.insertedId) {

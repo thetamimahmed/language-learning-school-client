@@ -6,7 +6,7 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const CheckOutForm = ({ price, myClass }) => {
-    const {user} =useAuth()
+    const { user } = useAuth()
     const [clientSecret, setClientSecret] = useState("");
     const [cardError, setCardError] = useState('')
     const stripe = useStripe();
@@ -34,7 +34,7 @@ const CheckOutForm = ({ price, myClass }) => {
         if (card == null) {
             return;
         }
-        
+
 
         const { error } = await stripe.createPaymentMethod({
             type: 'card',
@@ -56,42 +56,46 @@ const CheckOutForm = ({ price, myClass }) => {
                     billing_details: {
                         name: user.displayName || 'Annonymus',
                         email: user.email || 'Unknown'
-                     },
+                    },
                 },
             }
-            );
-            if(confirmError){
-                console.log(confirmError)
+        );
+        if (confirmError) {
+            console.log(confirmError)
+        }
+        console.log(['paymentIntent'], paymentIntent)
+        setProcessing(false)
+        if (paymentIntent.status === "succeeded") {
+            setTransactionId(paymentIntent.id)
+            const payment = {
+                className: myClass.name,
+                classImg: myClass.image,
+                email: user?.email,
+                transactionId: paymentIntent.id,
+                date: new Date(),
             }
-            console.log(['paymentIntent'], paymentIntent)
-            setProcessing(false)
-            if(paymentIntent.status === "succeeded"){
-                setTransactionId(paymentIntent.id)
-                const payment = {
-                    className: myClass.name,
-                    classImg: myClass.image,
-                    email: user?.email,
-                    transactionId: paymentIntent.id,
-                    date: new Date(),
-                }
-                axiosSecure.post('/payments', payment)
+            axiosSecure.post('/payments', payment)
                 .then(data => {
                     console.log(data)
                     if (data.data.insertedId) {
                         axiosSecure.delete(`/bookingclasses?id=${myClass._id}`)
-                        .then(()=>{
-                            Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Payment Done',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        })
-                        
+                            .then(() => {
+                                axiosSecure.patch(`/classes/${myClass.classID}`, myClass)
+                                    .then((data) => {
+                                        console.log(data)
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'success',
+                                            title: 'Payment Done',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                    })
+                            })
+
                     }
                 })
-            }
+        }
     };
 
 
