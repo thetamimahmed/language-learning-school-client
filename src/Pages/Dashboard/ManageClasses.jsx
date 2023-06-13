@@ -11,7 +11,7 @@ const ManageClasses = () => {
     const { data: instructorsClasses = [], refetch } = useQuery({
         queryKey: ['instructorsClasses'],
         queryFn: async () => {
-            const res = await axiosSecure("/addedClasses")
+            const res = await axiosSecure.get("/addedClasses")
             return res.data;
         }
     })
