@@ -10,7 +10,7 @@ const ClassList = () => {
     const { data: addedClasses = [] } = useQuery({
         queryKey: ['addedClasses', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure(`/addedClasses?email=${user?.email}`)
+            const res = await axiosSecure.get(`/addedClasses?email=${user?.email}`)
             return res.data;
         }
     })

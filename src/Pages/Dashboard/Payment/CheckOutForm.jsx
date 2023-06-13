@@ -71,6 +71,7 @@ const CheckOutForm = ({ price, myClass }) => {
                 className: myClass.name,
                 price: myClass.price,
                 classImg: myClass.image,
+                instructor: myClass.instructor,
                 email: user?.email,
                 transactionId: paymentIntent.id,
                 date: new Date(),

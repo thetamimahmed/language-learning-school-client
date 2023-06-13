@@ -1,10 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react';
 import Swal from 'sweetalert2';
+import useAdmin from '../../Hooks/useAdmin';
 
 import useAuth from '../../Hooks/useAuth';
+import useInstructor from '../../Hooks/useInstructor';
 
 const Classes = () => {
+  const [isAdmin] = useAdmin()
+  const [isInstructor] = useInstructor()
   const [disabledButtons, setDisabledButtons] = useState([]);
 
   const {user} = useAuth()
@@ -62,7 +66,7 @@ const Classes = () => {
                   <p>Price: ${course.price}</p>              
                   <p>Enroll: {course.total_enroll} Students</p>              
                 </div>
-                <button disabled={disabledButtons.includes(course._id) || course.available_seats===0}   onClick={()=>{handleSelectClass(course)}} className="btn bg-[#84D19F] text-white hover:bg-[#584B9F] rounded-none">Select</button>
+                <button disabled={disabledButtons.includes(course._id) || course.available_seats===0 || isAdmin || isInstructor }   onClick={()=>{handleSelectClass(course)}} className="btn bg-[#84D19F] text-white hover:bg-[#584B9F] rounded-none">Select</button>
               </div>)
             }
         </div>
