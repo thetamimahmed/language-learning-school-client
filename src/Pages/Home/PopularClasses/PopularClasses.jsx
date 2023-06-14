@@ -14,7 +14,7 @@ const PopularClasses = () => {
     const { data: classes = [] } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/classes")
+            const res = await fetch("https://languager-learning-school-server.vercel.app/classes")
             return res.json();
         },
     })
@@ -23,7 +23,7 @@ const PopularClasses = () => {
         const {_id, name, instructor, available_seats, price, image, total_enroll} = course
         if(user && user?.email){
           const selectClass = {classID:_id, name, instructor, available_seats, price, image, total_enroll,  email: user.email}
-          fetch('http://localhost:5000/bookingclasses',{
+          fetch('https://languager-learning-school-server.vercel.app/bookingclasses',{
             method: 'POST',
             headers: {
               'content-type':'application/json'
@@ -49,7 +49,7 @@ const PopularClasses = () => {
       }
 
     return (
-        <div className='bg-gradient-to-t from-transparent via-[#84d19f97]  to-transparent'>
+        <div  data-aos="fade-up" className='bg-gradient-to-t from-transparent via-[#84d19f97]  to-transparent'>
             <h1 className='ml-12 text-3xl mt-10 border-b-4 border-[#84D19F] w-1/5 pb-3 text-[#6255A5] font-bold'>Popular Classes</h1>
 
             <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10 pb-10 '>

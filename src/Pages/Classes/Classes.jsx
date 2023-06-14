@@ -17,7 +17,7 @@ const Classes = () => {
   const { data: classes = [] } = useQuery({
     queryKey: ['classes'],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/classes")
+      const res = await fetch("https://languager-learning-school-server.vercel.app/classes")
       return res.json();
     },
   })
@@ -26,7 +26,7 @@ const Classes = () => {
     const { _id, name, instructor, available_seats, price, image, total_enroll } = course
     if (user && user?.email) {
       const selectClass = { classID: _id, name, instructor, available_seats, price, image, total_enroll, email: user.email }
-      fetch('http://localhost:5000/bookingclasses', {
+      fetch('https://languager-learning-school-server.vercel.app/bookingclasses', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'

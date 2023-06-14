@@ -51,7 +51,7 @@ const AuthProvider = ({children}) => {
             setLoading(false)
             //get and set jwt
             if(currenUser){
-                axios.post('http://localhost:5000/jwt', {email: currenUser.email})
+                axios.post('https://languager-learning-school-server.vercel.app/jwt', {email: currenUser.email})
                 .then(data =>{
                     console.log(data.data)
                     localStorage.setItem("access-token", data.data)

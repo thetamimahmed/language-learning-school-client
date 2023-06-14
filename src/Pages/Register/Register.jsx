@@ -21,7 +21,7 @@ const Register = () => {
                 console.log(loggedUser)
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
-                        const saveUser = { name: data.name, email: data.email, role: 'student' }
+                        const saveUser = { name: data.name, email: data.email, image: data.photoURL, role: 'student' }
                         axiosSecure.post("/users", saveUser)
                             .then(data => {
                                 if (data.data.insertedId) {

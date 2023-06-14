@@ -55,13 +55,13 @@ const AddClass = () => {
                         <label className="label">
                             <span className="label-text text-lg">Instructor Name</span>
                         </label>
-                        <input type="text"  {...register("instructor", { required: true })} placeholder="Instructor Name" defaultValue={user?.displayName} className="input input-bordered" />
+                        <input type="text"  {...register("instructor", { required: true })} placeholder="Instructor Name" defaultValue={user?.displayName} readOnly className="input input-bordered" />
                     </div>
                     <div className="form-control mb-4 w-1/2">
                         <label className="label">
                             <span className="label-text text-lg">Instructor Email</span>
                         </label>
-                        <input type="email" {...register("email", { required: true })} placeholder="Instructor Email"  defaultValue={user?.email} className="input input-bordered" />
+                        <input type="email" {...register("email", { required: true })} placeholder="Instructor Email"  defaultValue={user?.email} readOnly className="input input-bordered" />
                     </div>
                 </div>
                 <div className="flex gap-5">

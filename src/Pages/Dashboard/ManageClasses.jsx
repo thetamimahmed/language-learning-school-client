@@ -18,7 +18,7 @@ const ManageClasses = () => {
     const handleApprove = (id, status) => {
         setClassID(id)
         const approveClass = instructorsClasses.find(instructorsClass => instructorsClass._id === id)
-        fetch(`http://localhost:5000/addedClasses/${status}/${id}`, {
+        fetch(`https://languager-learning-school-server.vercel.app/addedClasses/${status}/${id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
