@@ -5,6 +5,8 @@ import ActiveLink from "./ActiveLink/ActiveLink";
 import { FaHome, FaHistory, FaUsers } from 'react-icons/fa';
 import { BiSelectMultiple, BiBookAdd } from "react-icons/bi";
 import { SiGoogleclassroom } from "react-icons/si";
+import { motion } from "framer-motion";
+
 
 
 
@@ -15,7 +17,10 @@ const Dashboard = () => {
     const [isInstructor] = useInstructor()
     console.log(isAdmin, isInstructor)
     return (
-        <div className="drawer lg:drawer-open">
+        <motion.div className="drawer lg:drawer-open" initial={{ width: 0 }}
+        animate={{ width: "100%" }}
+        exit={{ width: window.innerWidth }}
+        transition={{ duration: 0.2 }}>
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
                 <Outlet></Outlet>
@@ -49,7 +54,7 @@ const Dashboard = () => {
 
             </div>
 
-        </div>
+        </motion.div>
     );
 };
 

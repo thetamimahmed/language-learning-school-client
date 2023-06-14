@@ -21,8 +21,7 @@ import AdminRoute from "./AdminRoute";
 import InstructrorRoute from "./InstructrorRoute";
 import PrivateRoute from "./PrivateRoute";
 
-
- const router = createBrowserRouter([
+const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
