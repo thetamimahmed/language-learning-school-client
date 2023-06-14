@@ -8,8 +8,8 @@ const Information = () => {
     const [counterOn, setCounterOn] = useState(false)
     return (
         <ScrollTrigger onEnter={()=>{setCounterOn(true)}} onExit={()=>{setCounterOn(false)}}>
-            <div className="bg-gradient-to-r from-transparent via-[#84d19f79] to-transparent h-60 my-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mx-20 h-60 my-auto">
+            <div className="bg-gradient-to-r from-transparent via-[#84d19f79] to-transparent  lg:h-60 my-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mx-20 lg:h-60 my-auto">
                     <div className="border-2 border-[#6255A5] rounded flex flex-col justify-center items-center">
                         <img className="w-24" src="https://i.ibb.co/z5N3cT6/icons8-students-100.png" alt="" />
                         <h1 className="text-[#6255A5] font-bold uppercase text-4xl">

@@ -13,6 +13,7 @@ import MySelectedClasses from "../Pages/Dashboard/MySelectedClasses";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
 import UpdateClass from "../Pages/Dashboard/UpdateClass";
+import ErrorPage from "../Pages/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors";
 import Login from "../Pages/Login/Login";
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
